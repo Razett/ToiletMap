@@ -1,0 +1,24 @@
+{
+  "display": "standalone",
+  "name": "ToiletMap",
+  "short_name": "ToiletMap",
+  "start_url": "/",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "/asset/logo.png",
+      "sizes": "975x975",
+      "type": "image/png"
+    },
+    {
+      "src": "/asset/logo-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/asset/logo-iphone.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}

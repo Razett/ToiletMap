@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>ToiletMap</title>
+  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+  <link href="../css/style.css" rel="stylesheet">
+  <link href="../css/sub.css" rel="stylesheet">
+</head>
+<body>
+<!-- Main Content -->
+<div class="map-background" id="map"></div>
+<div class="login-form-background"></div>
+<div class="login-form">
+  <h3 class="mb-4 text-center">Login</h3>
+  <form action="/login" method="post">
+    <div class="mb-3">
+      <label class="form-label" for="username">Username</label>
+      <input type="text" class="form-control" name="username" id="username" placeholder="Username">
+    </div>
+    <div class="mb-4">
+      <label class="form-label" for="password">Password</label>
+      <input type="password" class="form-control" name="password" id="password" placeholder="********">
+    </div>
+    <button type="submit" class="btn btn-primary w-100">Sign In</button>
+  </form>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+<script type="text/javascript" src="../js/location.js"></script>
+<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=rkzrjlm2t4&submodules=drawing"></script>
+<script>
+    var _geo_lng;
+    var _geo_lat;
+    var _geo_type = 'none';
+
+    geoLocationByGPS();
+
+    document.addEventListener('DOMContentLoaded', function () {
+        getGeoLocation().then(location => {
+            const mapOptions = {
+                center: new naver.maps.LatLng(location.lat, location.lng),
+                zoom: 16
+            };
+
+            const map = new naver.maps.Map(document.getElementById('map'), mapOptions);
+        }).catch(error => {
+            const map = new naver.maps.Map(document.getElementById('map'));
+        });
+    });
+</script>
+</body>
+</html>

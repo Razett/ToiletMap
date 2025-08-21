@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="setContent(head, content, script)">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="apple-touch-icon" th:href="@{/asset/logo-iphone.png}">
+    <title>ToiletMap</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <link href="../../css/style.css" rel="stylesheet">
+    <link href="../../css/sub.css" rel="stylesheet">
+    <link th:href="@{/manifest.json}" rel="manifest">
+    <style>
+      #loader {
+        transition: all 0.3s ease-in-out;
+        opacity: 1;
+        visibility: visible;
+        position: fixed;
+        height: 100vh;
+        width: 100%;
+        background: #fff;
+        z-index: 90000;
+      }
+
+      #loader.fadeOut {
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      .spinner {
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        top: calc(50% - 20px);
+        left: calc(50% - 20px);
+        background-color: #333;
+        border-radius: 100%;
+        -webkit-animation: sk-scaleout 1.0s infinite ease-in-out;
+        animation: sk-scaleout 1.0s infinite ease-in-out;
+      }
+
+      @-webkit-keyframes sk-scaleout {
+        0% { -webkit-transform: scale(0) }
+        100% {
+          -webkit-transform: scale(1.0);
+          opacity: 0;
+        }
+      }
+
+      @keyframes sk-scaleout {
+        0% {
+          -webkit-transform: scale(0);
+          transform: scale(0);
+        } 100% {
+            -webkit-transform: scale(1.0);
+            transform: scale(1.0);
+            opacity: 0;
+          }
+      }
+    </style>
+  </head>
+  <body class="app">
+
+  <!-- Loader -->
+  <div id="loader">
+    <div class="spinner"></div>
+  </div>
+
+  <script>
+    window.addEventListener('load', function load() {
+      const loader = document.getElementById('loader');
+      setTimeout(function() {
+        loader.classList.add('fadeOut');
+      }, 300);
+    });
+  </script>
+
+<!--   Service Worker Registration-->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/serviceworker.js')
+                .then(registration => {
+                  console.log('Service Worker registered with scope:', registration.scope);
+                })
+                .catch(error => {
+                  console.error('Service Worker registration failed:', error);
+                });
+      });
+    }
+  </script>
+
+  <!-- Toast -->
+  <div aria-live="polite" aria-atomic="true" class="position-fixed z-3">
+    <div id="toast-container" class="toast-container position-fixed top-0 end-0 mt-5 px-3 pt-4 pb-3">
+      <!-- Then put toasts within -->
+    </div>
+  </div>
+
+  <!-- PWA Navbar Bottom Style -->
+  <script>
+    // if "standalone" mode.
+    if (window.matchMedia('(display-mode: standalone)').matches) {
+      document.querySelector('.main-container').classList.add('standalone');
+    }
+  </script>
+
+  <!-- Main -->
+  <main class="bgc-grey-200 overflow-y-scroll">
+    <div id="mainContent">
+      <nav class="navbar sticky-top">
+        <div class="container-fluid">
+          <a class="navbar-brand d-flex align-items-center gap-1" href="#">
+            <img src="../../asset/logo.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+            <h4>&nbsp;&nbsp;</h4>
+          </a>
+          <div class="d-flex gap-2">
+<!--            <a class="d-flex flex-column align-items-center text-decoration-none c-grey-700 p-2">-->
+<!--              <i class="fa-solid fa-map"></i>-->
+<!--            </a>-->
+<!--            <a class="d-flex flex-column align-items-center text-decoration-none c-grey-700 p-2">-->
+<!--              <i class="fa-solid fa-list"></i>-->
+<!--            </a>-->
+            <a class="d-flex flex-column align-items-center text-decoration-none c-grey-700 p-2" onclick="toggleSearch(this)" id="h-search-btn">
+              <i class="fa-solid fa-search"></i>
+            </a>
+          </div>
+        </div>
+      </nav>
+      <div class="search-place" id="search-place">
+        <input type="text" name="keyword" class="form-control" placeholder="장소 검색">
+        <button type="button" class="btn btn-primary" onclick="search_place()">
+          <i class="fa-solid fa-search"></i>
+        </button>
+      </div>
+      <div class="main-container">
+        <!-- Content -->
+        <th:block th:replace="${content}"></th:block>
+        <!-- if Navbar Bottom hide -->
+      </div>
+    </div>
+  </main>
+
+  <script src="../../js/main.js"></script>
+  <script src="../../js/sub.js"></script>
+  <script src="../../js/toast.js"></script>
+  <script>
+    var map;
+
+    var _geo_lat = 0;
+    var _geo_lng = 0;
+    var _geo_type = 'none';
+
+
+    var _current_location_marker;
+    var _current_location_address = "현재 위치 주변";
+    var markers = [];
+    var markers_saved = [];
+  </script>
+  <th:block th:replace="${script}"></th:block>
+  <script>
+    var msg = '[[${msg}]]';
+    if (msg) {
+      ToastService.printToast(msg);
+    }
+  </script>
+  </body>
+</th:block>
+</html>
