@@ -27,7 +27,7 @@
             <div class="title-area">
                 <h3 class="title">저장된 주변 장소</h3>
                 <button class="close d-none" data-tab="tab-search" onclick="clearSearchList()">
-                    <span>X</span>
+                    <i class="fa-solid fa-circle-xmark"></i>
                 </button>
             </div>
             <span class="search-count c-grey-800">{GeoLocation}</span>
@@ -195,7 +195,7 @@
                                 search_place_ajax();
                             }
                         } else {
-                            if (_nearby_toilet_get_continue && !_search_is_fetching) {
+                            if (_nearby_toilet_get_continue && !_nearby_toilet_is_fetching) {
                                 getNearbyToilet();
                             }
                         }

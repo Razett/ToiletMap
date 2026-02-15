@@ -62,6 +62,7 @@ public class PlaceService {
     }
 
     public List<ToiletDTO> getNearByToilets(GetToiletREQ getToiletREQ) {
+        getToiletREQ.setPage(getToiletREQ.getPage() * getToiletREQ.getCount());
         List<PlaceToilet> placeToiletList = placeToiletRepository.findNearByToilets(getToiletREQ.getLat(), getToiletREQ.getLng(), getToiletREQ.getPage(), getToiletREQ.getCount());
 
         List<ToiletDTO> toiletDTOList = new ArrayList<>();

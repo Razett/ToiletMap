@@ -77,7 +77,7 @@ function drawSearchResult(data) {
     $('.floating-list #tab-search').removeClass('d-none');
     for (const r of data) {
         const _search_result_html = `
-            <div class="item bgc-grey-50" data-lat="${r.y}" data-lng="${r.x}" data-place-id="${r.id}" tabindex="0">
+            <div class="item" data-lat="${r.y}" data-lng="${r.x}" data-place-id="${r.id}" tabindex="0">
                 <div class="place-info">
                   <span class="place-distance c-blue-500">${formatDistanceMeters(r.distance)}</span>
                   <h4 class="place-name">${r.place_name}</h4>
@@ -85,12 +85,13 @@ function drawSearchResult(data) {
                 </div>
               <div class="toilet-info">
               </div>
-            </div>`;
+            </div>
+            <hr class="item-hr">`;
 
         $('.floating-list #tab-search').append(_search_result_html);
         $('.floating-list #tab-search .item').last().focus(function () {
             $(this).addClass('bgc-blue-50');
-            $(this).removeClass('bgc-grey-50');
+            // $(this).removeClass('bgc-grey-50');
 
 
             const _r_id = $(this).data('place-id');
@@ -116,7 +117,7 @@ function drawSearchResult(data) {
             }
         });
         $('.floating-list #tab-search .item').last().blur(function () {
-            $('.floating-list #tab-search .item').addClass(('bgc-grey-50'));
+            // $('.floating-list #tab-search .item').addClass(('bgc-grey-50'));
             $('.floating-list #tab-search .item').removeClass(('bgc-blue-50'));
             markers.forEach(marker => {
                 marker.setVisible(true);
@@ -152,6 +153,8 @@ function drawSearchResult(data) {
                 id: r.id
             }
             markers.push(marker);
+
+            $('.floating-list #tab-search .item').last().addClass('is-saved');
         } else {
             _toilet_info_html = `
                 <button class="c-grey-800" onclick="showAddToiletModal(this)">
@@ -371,7 +374,7 @@ function getNearbyToilet() {
         if (data) {
             for (const toilet of data) {
                 const _nearby_toilet_html = `
-                    <div class="item bgc-grey-50" data-lat="${toilet.placeInfoDTO.latitude}" data-lng="${toilet.placeInfoDTO.longitude}" data-toilet-id="${toilet.id}" tabindex="0">
+                    <div class="item" data-lat="${toilet.placeInfoDTO.latitude}" data-lng="${toilet.placeInfoDTO.longitude}" data-toilet-id="${toilet.id}" tabindex="0">
                         <div class="place-info">
                           <span class="place-distance c-blue-500">${formatDistance(toilet.placeInfoDTO.latitude, toilet.placeInfoDTO.longitude)}</span>
                           <h4 class="place-name">${toilet.placeInfoDTO.title}</h4>
@@ -379,12 +382,13 @@ function getNearbyToilet() {
                         </div>
                       <div class="toilet-info">
                       </div>
-                    </div>`;
+                    </div>
+                    <hr class="item-hr">`;
 
                 $('.floating-list #tab-list').append(_nearby_toilet_html);
                 $('.floating-list #tab-list .item').last().focus(function () {
                     $(this).addClass('bgc-blue-50');
-                    $(this).removeClass('bgc-grey-50');
+                    // $(this).removeClass('bgc-grey-50');
 
 
                     const _toilet_id = $(this).data('toilet-id');
@@ -410,7 +414,7 @@ function getNearbyToilet() {
                     }
                 });
                 $('.floating-list #tab-list .item').last().blur(function () {
-                    $('.floating-list #tab-list .item').addClass(('bgc-grey-50'));
+                    // $('.floating-list #tab-list .item').addClass(('bgc-grey-50'));
                     $('.floating-list #tab-list .item').removeClass(('bgc-blue-50'));
                     markers_saved.forEach(marker => {
                         marker.setVisible(true);
