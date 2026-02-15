@@ -51,8 +51,8 @@ let isExpanded = false;
 
 const MAX_HEIGHT = window.innerHeight - 56 - 10;
 const MAX_HEIGHT_STR = `calc(100% - 56px - 10px)`;
-const MIN_HEIGHT = window.innerHeight * 0.35;
-const MIN_HEIGHT_STR = '35%';
+const MIN_HEIGHT = window.innerHeight * 0.38;
+const MIN_HEIGHT_STR = '38%';
 
 dragHandle.addEventListener('touchstart', function (e) {
     isDragging = true;

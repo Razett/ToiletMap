@@ -147,7 +147,7 @@ main {
     width: 2rem;
     height: 2rem;
     position: absolute;
-    bottom: calc(35% + 1rem);
+    bottom: calc(38% + 1rem);
     right: 1rem;
     background-color: #fff;
     color: #616161;
@@ -180,7 +180,8 @@ main {
 }
 #mainContent .main-container .floating-list {
     width: 100%;
-    height: 35%;
+    height: 38%;
+    min-height: 250px;
     background-color: #fff;
     position: absolute;
     left: 0;
@@ -340,4 +341,41 @@ main {
     width: 20%;
     text-align: center;
     border: none;
+}
+@media screen and (orientation: landscape) {
+    /*body::before {*/
+    /*    content: "세로 모드로 돌려주세요";*/
+    /*    position: fixed;*/
+    /*    inset: 0;*/
+    /*    background: rgba(255, 255, 255, 0.7);*/
+    /*    backdrop-filter: blur(4px);*/
+    /*    -webkit-backdrop-filter: blur(10px);*/
+    /*    color: #000;*/
+    /*    font-size: 22px;*/
+    /*    font-weight: 600;*/
+    /*    display: flex;*/
+    /*    align-items: center;*/
+    /*    justify-content: center;*/
+    /*    z-index: 9999;*/
+    /*}*/
+
+    #mainContent .main-container .map-index {
+        height: 100%;
+        width: 60%;
+    }
+    #mainContent .main-container .floating-list {
+        width: 40%;
+        margin-left: auto;
+        left: auto;
+        right: 0;
+        height: calc(100% - 50px) !important;
+        border-radius: 0;
+    }
+    .location-refresh {
+        right: calc(40% + 1rem);
+        bottom: 1.5rem;
+        display: block !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+    }
 }
