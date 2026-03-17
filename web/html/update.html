@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{/base/base::setContent(~{this::head}, ~{this::content}, ~{this::script})}">
 <head>
     <meta charset="UTF-8">
     <title>Edit Toilet | ToiletMap</title>
 </head>
 <body>
-    정지원은 바보다
+        <th:block th:fragment="content">
+            정지원은 바보였다 지금두 바보다
+        </th:block>
+        <th:block th:fragment="script"></th:block>
 </body>
 </html>
