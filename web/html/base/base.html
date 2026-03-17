@@ -10,6 +10,7 @@
     <link href="../../css/style.css" rel="stylesheet">
     <link href="../../css/sub.css" rel="stylesheet">
     <link th:href="@{/manifest.json}" rel="manifest">
+    <th:block th:replace="${head}"></th:block>
     <style>
       #loader {
         transition: all 0.3s ease-in-out;
@@ -121,6 +122,9 @@
 <!--            <a class="d-flex flex-column align-items-center text-decoration-none c-grey-700 p-2">-->
 <!--              <i class="fa-solid fa-list"></i>-->
 <!--            </a>-->
+            <a class="d-flex flex-column align-items-center text-decoration-none c-grey-700 p-2" th:href="@{/update}">
+              <i class="fa-solid fa-pencil"></i>
+            </a>
             <a class="d-flex flex-column align-items-center text-decoration-none c-grey-700 p-2" onclick="toggleSearch(this)" id="h-search-btn">
               <i class="fa-solid fa-search"></i>
             </a>
